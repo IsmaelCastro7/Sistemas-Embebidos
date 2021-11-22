@@ -1,0 +1,183 @@
+/*
+ * CAPÍTULO III: MÓDULOS DE COMUNICACIÓN I2C
+ * DEBER 3.1
+ * OBJETIVO: El usuario ingresa el caracter especificado por comunicación serial, el máster lo recibe
+ *            y envía por i2c hacia el esclavo y según el dato enviado enciende de forma síncrona los leds
+ * NOMBRE: Ismael Castro
+ * FUNCIONES: 
+ *           Wire.begin()
+ *           Wire.beginTransmission(address) -> ID de esclavo
+ *           
+ */
+ ///////////////////////////MASTER//////////////////////
+#include <Wire.h>                      //librería I2C
+char valor;
+void setup() {
+  // put your setup code here, to run once:
+  Wire.begin();           //inicia comunicacion i2c
+  Serial.begin(9600);     // inicia comunicacion serial
+  Serial.println("Conectar Esclavo1  = I ");     // opcion para esclavo 1
+  Serial.println("Conectar Esclavo2  = C ");     // opcion para esclavo 2
+  Serial.println("Conectar Esclavo3  = D ");    // opcion para esclavo 3
+
+}
+
+void loop() {
+  // put your main code here, to run repeatedly:
+  if(Serial.available()>0){             //verifica el puerto de comunicacion
+        valor=Serial.read();               // almacena el dato en variable
+        Wire.beginTransmission(4);        // empieza comunicacion i2c
+        Wire.write(valor);                 // envía dato
+        Wire.endTransmission();           // termina comunicacion i2c
+      }
+
+}
+
+
+ ///////////////////////////SLAVE 1//////////////////////
+ #include <Wire.h>            //librería i2c
+ char valor;
+
+ const int led1=8; // led1 en pin8
+ const int led2=9; // led2 en pin9
+ const int led3=10; // led3 en pin10
+ const int led4=11; // led4 en pin11
+void setup() {
+  // put your setup code here, to run once:
+  Wire.begin(4); // id de esclavo
+  Wire.onReceive(receiveEvent1); // evento de recepción
+  Serial.begin(9600); // inicio de cx serial
+  pinMode(led1,OUTPUT); // pin8 como salida
+  pinMode(led2,OUTPUT); // pin9 como salida
+  pinMode(led3,OUTPUT); // pin10 como salida
+  pinMode(led4,OUTPUT); // pin10 como salida
+
+}
+
+void loop() {
+  // put your main code here, to run repeatedly:
+
+}
+
+void receiveEvent1 (int bytes){
+  while(Wire.available()){
+  valor=Wire.read();
+  if(valor=='I'){
+      digitalWrite(led1,HIGH);        // encender led1
+      delay(9000);
+      digitalWrite(led1,LOW);         //apagar led1    
+      delay(9000);
+      digitalWrite(led2,HIGH);        // encender led2
+      delay(9000);
+      digitalWrite(led2,LOW);         //apagar led2
+      delay(9000);
+      digitalWrite(led3,HIGH);        // encender led3
+      delay(9000);
+      digitalWrite(led3,LOW);         //apagar led3
+      delay(9000);
+      digitalWrite(led4,HIGH);        // encender led4
+      delay(9000);
+      digitalWrite(led4,LOW);         //apagar led4
+      delay(9000);
+  }
+  }
+  }
+  
+  
+   ///////////////////////////SLAVE 2//////////////////////
+ #include <Wire.h>            //librería i2c
+ char valor;
+
+ const int led5=8; // led1 en pin8
+ const int led6=9; // led2 en pin9
+ const int led7=10; // led3 en pin10
+ const int led8=11; // led4 en pin11
+void setup() {
+  // put your setup code here, to run once:
+  Wire.begin(4); // id de esclavo
+  Wire.onReceive(receiveEvent2); // evento de recepción
+  Serial.begin(9600); // inicio de cx serial
+  pinMode(led5,OUTPUT); // pin8 como salida
+  pinMode(led6,OUTPUT); // pin9 como salida
+  pinMode(led7,OUTPUT); // pin10 como salida
+  pinMode(led8,OUTPUT); // pin10 como salida
+
+}
+
+void loop() {
+  // put your main code here, to run repeatedly:
+
+}
+
+void receiveEvent2 (int bytes){
+  while(Wire.available()){
+  valor=Wire.read();
+  if(valor=='C'){
+      digitalWrite(led5,HIGH);        // encender led1
+      delay(9000);
+      digitalWrite(led5,LOW);         //apagar led1    
+      delay(9000);
+      digitalWrite(led6,HIGH);        // encender led2
+      delay(9000);
+      digitalWrite(led6,LOW);         //apagar led2
+      delay(9000);
+      digitalWrite(led7,HIGH);        // encender led3
+      delay(9000);
+      digitalWrite(led7,LOW);         //apagar led3
+      delay(9000);
+      digitalWrite(led8,HIGH);        // encender led4
+      delay(9000);
+      digitalWrite(led8,LOW);         //apagar led4
+      delay(9000);
+     }
+  }
+ }
+  ///////////////////////////SLAVE 3//////////////////////
+ #include <Wire.h>            //librería i2c
+ char valor;
+
+ const int led9=8; // led1 en pin8
+ const int led10=9; // led2 en pin9
+ const int led11=10; // led3 en pin10
+ const int led12=11; // led4 en pin11
+void setup() {
+  // put your setup code here, to run once:
+  Wire.begin(4); // id de esclavo
+  Wire.onReceive(receiveEvent1); // evento de recepción
+  Serial.begin(9600); // inicio de cx serial
+  pinMode(led9,OUTPUT); // pin8 como salida
+  pinMode(led10,OUTPUT); // pin9 como salida
+  pinMode(led11,OUTPUT); // pin10 como salida
+  pinMode(led12,OUTPUT); // pin10 como salida
+
+}
+
+void loop() {
+  // put your main code here, to run repeatedly:
+
+}
+
+void receiveEvent1 (int bytes){
+  while(Wire.available()){
+  valor=Wire.read();
+  if(valor=='D'){
+      digitalWrite(led9,HIGH);        // encender led1
+      delay(9000);
+      digitalWrite(led9,LOW);         //apagar led1    
+      delay(9000);
+      digitalWrite(led10,HIGH);        // encender led2
+      delay(9000);
+      digitalWrite(led10,LOW);         //apagar led2
+      delay(9000);
+      digitalWrite(led11,HIGH);        // encender led3
+      delay(9000);
+      digitalWrite(led11,LOW);         //apagar led3
+      delay(9000);
+      digitalWrite(led12,HIGH);        // encender led4
+      delay(9000);
+      digitalWrite(led12,LOW);         //apagar led4
+      delay(9000);
+     }
+  }
+
+}
