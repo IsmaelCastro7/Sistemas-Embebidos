@@ -1,0 +1,84 @@
+/*
+ *CAPÍTULO 6: DISEÑO DE INTERFACES
+ *DEBER 6.2
+ *NOMBRE: Ismael Castro
+*/
+//RETO 1
+void setup() {
+  size(500, 500); 
+  textAlign(CENTER); 
+  textSize(24); 
+  fill(10,10,10);
+  text("Presione el Botón para",250,50);
+  text("Encender o Apagar el LED",250,75);
+}
+void draw() {  
+}
+void mousePressed(){
+  if(mouseButton == RIGHT){
+      fill(99,33,29);
+      ellipse(250,250,200,200);
+  }
+  if(mouseButton == LEFT){
+      fill(64,188,74);
+      ellipse(250,250,200,200);
+  }
+}
+
+void mouseReleased(){
+  if(mouseButton == RIGHT){
+    noStroke();
+    fill(46,255,63);
+    ellipse(250,250,200,200);
+    fill(255,255,255);
+    text("¡Encendido!",250,250);
+  }
+
+  if(mouseButton == LEFT){
+    noStroke();
+    fill(255,0,0);
+    ellipse(250,250,200,200);
+    fill(255,255,255);
+    text("¡Apagado!",250,250);
+  }
+}
+
+
+//RETO 2
+int i=0;
+void setup(){
+  size(700,500);      //tamaño de la interfaz
+  background(0);      //0--> negro, 255--> blanco
+}
+
+void draw(){
+  textSize(30);        //tamaño del texto
+  text("  ",315,60);    //ubicación de mensaje vacios
+  text("  ",395,60);
+  fill(0);
+  stroke(0);
+  rect(280,40,155,25);
+  
+  fill(0,255,0);
+  text("INTERFAZ",280,35);        //texto
+  fill(255,255,255);
+  text("Ismael Castro",280,450);
+  textSize(20);
+  text("CX:",280,60);
+  text(mouseX,315,60);          //muestra coordenada de mouse X
+  text("CY:",360,60);
+  text(mouseY,395,60);          //muestra coordenada de mouse Y
+  stroke(255,0,0);
+  line(0,0,mouseX,mouseY);      //Genera una línea desde vértice hasta la ubicación de mouse
+}
+void mouseClicked(){          //evento si usuario presiona click derecho
+  if(mouseButton==LEFT){          //confirma si presiona el botón izquierdo
+    fill(255,255,0);
+    ellipse(mouseX,mouseY,10,10);      //muestra esfera
+  }
+}
+void keyPressed(){            //evento de presión de tecla
+  if(key=='A'){          //si presiona A
+    background(0);        //borra interfaz
+  }
+}
